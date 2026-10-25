@@ -1,0 +1,11 @@
+generated/
+.venv/
+build/
+build-vita/
+compile_commands.json
+assets/
+run/
+build-asan/
+/tools/__pycache__
+/tools/gpu/__pycache__
+/tools/mosaic/__pycache__
