@@ -76,6 +76,14 @@ HLE(sceMouseRead) {
     int dx, dy, wheel;
     uint32_t buttons;
     platform_mouse(&dx, &dy, &wheel, &buttons);
+    static uint32_t last_buttons;
+    static int reported;
+    if (reported && !dx && !dy && !wheel && buttons == last_buttons) {
+        RET(c, 0);
+        return;
+    }
+    reported = 1;
+    last_buttons = buttons;
     memset(d, 0, 40);
     const uint64_t t = SDL_GetTicks64() * 1000;
     memcpy(d, &t, 8);
